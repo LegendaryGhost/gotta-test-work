@@ -62,9 +62,15 @@ public class Step {
         } catch (Exception e) {
             throw e;
         } finally {
-            resultSet.close();
-            statement.close();
-            connection.close();
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
         }
 
         return steps;
@@ -140,9 +146,15 @@ public class Step {
         } catch (Exception e) {
             throw e;
         } finally {
-            resultSet.close();
-            statement.close();
-            connection.close();
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
         }
 
         return steps;
@@ -170,9 +182,15 @@ public class Step {
         } catch (Exception e) {
             throw e;
         } finally {
-            resultSet.close();
-            statement.close();
-            connection.close();
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
         }
     }
 
