@@ -10,6 +10,7 @@ public class Ingredient {
     private int id;
     private String name = "";
     private String unit = "";
+    private int price = 1;
 
     public Ingredient() {}
     
@@ -22,10 +23,11 @@ public class Ingredient {
         this.unit = unit;
     }
 
-    public Ingredient(int id, String name, String unit) {
+    public Ingredient(int id, String name, String unit, int price) {
         this.id = id;
         this.name = name;
         this.unit = unit;
+        this.price = price;
     }
 
     public static ArrayList<Ingredient> all() throws Exception {
@@ -45,13 +47,15 @@ public class Ingredient {
             int id;
             String name;
             String unit;
+            int price;
             while (resultSet.next()) {
                 id = resultSet.getInt("id_ingredient");
                 name = resultSet.getString("ingredient_name");
                 unit = resultSet.getString("unit");
+                price = resultSet.getInt("price");
 
                 ingredients.add(
-                    new Ingredient(id, name, unit)
+                    new Ingredient(id, name, unit, price)
                 );
             }
         } catch (Exception e) {
@@ -67,7 +71,9 @@ public class Ingredient {
 
     public static ArrayList<Ingredient> search(
         String searchName,
-        String searchUnit
+        String searchUnit,
+        int minPrice,
+        int maxPrice
     ) throws Exception {
         ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
 
@@ -83,6 +89,14 @@ public class Ingredient {
             sql.append(" WHERE ingredient_name ILIKE ?");
             sql.append(" AND unit ILIKE ?");
 
+            if (minPrice != 0) {
+                sql.append(" AND price >= ?");
+            }
+
+            if (maxPrice != 0) {
+                sql.append(" AND price <= ?");
+            }
+
             statement = connection.prepareStatement(
                 sql.toString()
             );
@@ -94,18 +108,30 @@ public class Ingredient {
             statement.setString(paramIndex, "%" + searchUnit + "%");
             paramIndex++;
 
+            if (minPrice != 0) {
+                statement.setInt(paramIndex, minPrice);
+                paramIndex++;
+            }
+
+            if (maxPrice != 0) {
+                statement.setInt(paramIndex, maxPrice);
+                paramIndex++;
+            }
+
             resultSet = statement.executeQuery();
 
             int id;
             String name;
             String unit;
+            int price;
             while (resultSet.next()) {
                 id = resultSet.getInt("id_ingredient");
                 name = resultSet.getString("ingredient_name");
                 unit = resultSet.getString("unit");
+                price = resultSet.getInt("price");
 
                 ingredients.add(
-                    new Ingredient(id, name, unit)
+                    new Ingredient(id, name, unit, price)
                 );
             }
         } catch (Exception e) {
@@ -136,6 +162,7 @@ public class Ingredient {
             while (resultSet.next()) {
                 name = resultSet.getString("ingredient_name");
                 unit = resultSet.getString("unit");
+                price = resultSet.getInt("price");
             }
         } catch (Exception e) {
             throw e;
@@ -153,11 +180,12 @@ public class Ingredient {
             connection = DBConnection.getPostgesConnection();
             connection.setAutoCommit(false);
             statement = connection.prepareStatement(
-                "INSERT INTO ingredient(ingredient_name, unit)"
-                + " VALUES (?, ?)"
+                "INSERT INTO ingredient(ingredient_name, unit, price)"
+                + " VALUES (?, ?, ?)"
             );
             statement.setString(1, name);
             statement.setString(2, unit);
+            statement.setInt(3, price);
             statement.executeUpdate();
             connection.commit();
         } catch (Exception e) {
@@ -177,12 +205,13 @@ public class Ingredient {
             connection.setAutoCommit(false);
             statement = connection.prepareStatement(
                 "UPDATE ingredient"
-                + " SET ingredient_name = ?, unit = ?"
+                + " SET ingredient_name = ?, unit = ?, price = ?"
                 + " WHERE id_ingredient = ?"
             );
             statement.setString(1, name);
             statement.setString(2, unit);
-            statement.setInt(3, id);
+            statement.setInt(3, price);
+            statement.setInt(4, id);
             statement.executeUpdate();
             connection.commit();
         } catch (Exception e) {
@@ -240,9 +269,17 @@ public class Ingredient {
         this.unit = unit;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
-        return "Ingredient [id=" + id + ", name=" + name + ", unit=" + unit + "]";
+        return "Ingredient [id=" + id + ", name=" + name + ", unit=" + unit + ", price=" + price + "]";
     }
   
 }

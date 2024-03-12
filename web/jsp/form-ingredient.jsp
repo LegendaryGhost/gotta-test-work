@@ -144,11 +144,15 @@
                                             <input type="hidden" name="idIngredient" value="<%= ingredient.getId() %>">
                                             <div class="mb-3">
                                                 <label class="form-label" for="ingredientName">Nom</label>
-                                                <input value="<%= ingredient.getName() %>" name="ingredientName" type="text" class="form-control" id="ingredientName" placeholder="Nom de la catégorie" />
+                                                <input required value="<%= ingredient.getName() %>" name="ingredientName" type="text" class="form-control" id="ingredientName" placeholder="Nom de la catégorie" />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label" for="ingredientUnit">Unité de mesure</label>
-                                                <input value="<%= ingredient.getUnit() %>" name="ingredientUnit" type="text" class="form-control" id="ingredientUnit" placeholder="Unité de mesure" />
+                                                <input required value="<%= ingredient.getUnit() %>" name="ingredientUnit" type="text" class="form-control" id="ingredientUnit" placeholder="Unité de mesure" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="ingredientPrice">Prix unitaire</label>
+                                                <input required value="<%= ingredient.getPrice() %>" name="ingredientPrice" min="1" type="number" class="form-control" id="ingredientPrice" placeholder="Prix unitaire" />
                                             </div>
                                             <% if(request.getAttribute("action").equals("create")) { %>
                                               <button type="submit" class="btn btn-success">Ajouter</button>

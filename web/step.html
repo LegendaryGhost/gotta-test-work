@@ -114,11 +114,19 @@
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
 
+                        <!-- Search modal button trigger -->
+                        <button type="button" class="btn btn-icon rounded-pill btn-secondary mx-auto me-2" data-bs-toggle="modal" data-bs-target="#searchModal">
+                            <span class="tf-icons bx bx-search"></span>
+                        </button>
+                        <!-- /Search modal button trigger -->
+
+                        <ul class="navbar-nav flex-row align-items-center">
+
                         <!-- User -->
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                            <div class="avatar avatar-online">
-                                <img src="assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                            <div class="d-flex align-items-center avatar avatar-online">
+                                <i class="bx bx-user-circle fs-3em"></i>
                             </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -126,8 +134,8 @@
                                 <a class="dropdown-item" href="#">
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
-                                    <div class="avatar avatar-online">
-                                        <img src="assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                    <div class="d-flex align-items-center avatar avatar-online">
+                                        <i class="bx bx-user-circle fs-3em"></i>
                                     </div>
                                     </div>
                                     <div class="flex-grow-1">
@@ -141,9 +149,15 @@
                                 <div class="dropdown-divider"></div>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="auth-login-basic.html">
-                                <i class="bx bx-power-off me-2"></i>
-                                <span class="align-middle">Log Out</span>
+                                <a class="dropdown-item" href="login.jsp">
+                                    <i class="bx bx-log-in me-2"></i>
+                                    <span class="align-middle">Me connecter</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="login">
+                                    <i class="bx bx-log-out me-2"></i>
+                                    <span class="align-middle">Me déconnecter</span>
                                 </a>
                             </li>
                             </ul>
@@ -158,6 +172,53 @@
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
+
+                        <!-- Search modal -->
+                        <div class="modal fade" id="searchModal" tabindex="-1" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel1">Critères de recherche</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="search-recipe">Recette</label>
+                                                <select name="searchIdRecipe" class="form-select" id="search-recipe" aria-label="Recette">
+                                                    <option selected value="0">Toutes les recettes</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                            <div class="row g-2 mb-3">
+                                                <div class="col mb-0">
+                                                    <label class="form-label" for="search-min-step-number">Numéro d'étape minimum</label>
+                                                    <input name="searchMinStepNumber" min="1" type="number" class="form-control" id="search-min-step-number" placeholder="Numéro d'étape" aria-label="Numéro d'étape" aria-describedby="search-min-step-number">
+                                                </div>
+                                                <div class="col mb-0">
+                                                    <label class="form-label" for="search-max-step-number">Numéro d'étape maximum</label>
+                                                    <input name="searchMaxStepNumber" min="1" type="number" class="form-control" id="search-max-step-number" placeholder="Numéro d'étape" aria-label="Numéro d'étape" aria-describedby="search-max-step-number">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="search-instruction">Instruction</label>
+                                                <input name="searchInstruction" type="text" class="form-control" id="search-instruction" placeholder="Instruction" aria-label="Instruction" aria-describedby="search-instruction">
+                                            </div>
+                                            <div class="modal-footer p-0">
+                                                <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                    Annuler
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">Rechercher</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Search modal -->
+
                         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gotta taste /</span> Etapes des recettes</h4>
 
                         <!-- Basic Bootstrap Table -->

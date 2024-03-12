@@ -24,7 +24,22 @@ public class IngredientServlet extends HttpServlet {
                 ingredient.delete();
             }
 
-            ArrayList<Ingredient> ingredients = Ingredient.all();
+            String name = req.getParameter("searchName") == null ? "" : req.getParameter("searchName");
+            String unit = req.getParameter("searchUnit") == null ? "" : req.getParameter("searchUnit");
+            String minPriceStr = req.getParameter("searchMinPrice");
+            String maxPriceStr = req.getParameter("searchMaxPrice");
+            int minPrice = 0;
+            int maxPrice = 0;
+
+            if (minPriceStr != null && !minPriceStr.equals("")) {
+                minPrice = Integer.parseInt(minPriceStr);
+            }
+
+            if (maxPriceStr != null && !maxPriceStr.equals("")) {
+                maxPrice = Integer.parseInt(maxPriceStr);
+            }
+
+            ArrayList<Ingredient> ingredients = Ingredient.search(name, unit, minPrice, maxPrice);
             req.setAttribute("ingredients", ingredients);
             RequestDispatcher dispatcher = req.getRequestDispatcher("ingredient.jsp");
             dispatcher.forward(req, resp);
@@ -39,7 +54,8 @@ public class IngredientServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("idIngredient"));
         String name = req.getParameter("ingredientName");
         String unit = req.getParameter("ingredientUnit");
-        Ingredient ingredient = new Ingredient(id, name, unit);
+        int price = Integer.parseInt(req.getParameter("ingredientPrice"));
+        Ingredient ingredient = new Ingredient(id, name, unit, price);
         
         try {
             if (action != null && action.equals("update")) {

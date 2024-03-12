@@ -9,11 +9,11 @@ INSERT INTO gotta_taste_user (firstname, lastname, email, user_password) VALUES
     ('Tiarintsoa', 'Mbolatsiory', 'tiarintsoa@gmail.com', '12345678');
 
 -- Insert into the 'ingredient' table
-INSERT INTO ingredient (ingredient_name, unit) VALUES  
-    ('Tomatoes', 'grams'),
-    ('Basil', 'leaves'),
-    ('Sugar', 'grams'),
-    ('Flour', 'grams');
+INSERT INTO ingredient (ingredient_name, unit, price) VALUES  
+    ('Tomatoes', 'grams', 100),
+    ('Basil', 'leaves', 200),
+    ('Sugar', 'grams', 1500),
+    ('Flour', 'grams', 2000);
 
 -- Insert into the 'recipe' table
 INSERT INTO recipe (title, recipe_description, id_category, cook_time, created_by) VALUES  

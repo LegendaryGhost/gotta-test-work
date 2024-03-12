@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.Recipe;
 import dao.Step;
 
 public class StepServlet extends HttpServlet {
@@ -24,8 +25,27 @@ public class StepServlet extends HttpServlet {
                 step.delete();
             }
 
-            ArrayList<Step> steps = Step.all();
+            ArrayList<Recipe> recipes = Recipe.all();
+
+            int idRecipe = req.getParameter("searchIdRecipe") == null ? 0 : Integer.parseInt(req.getParameter("searchIdRecipe"));
+            String minStepNumberStr = req.getParameter("searchMinStepNumber");
+            String maxStepNumberStr = req.getParameter("searchMaxStepNumber");
+            String instruction = req.getParameter("searchInstruction") == null ? "" : req.getParameter("searchInstruction");
+            int minStepNumber = 0;
+            int maxStepNumber = 0;
+
+            if (minStepNumberStr != null && !minStepNumberStr.equals("")) {
+                minStepNumber = Integer.parseInt(minStepNumberStr);
+            }
+
+            if (maxStepNumberStr != null && !maxStepNumberStr.equals("")) {
+                maxStepNumber = Integer.parseInt(maxStepNumberStr);
+            }
+
+            ArrayList<Step> steps = Step.search(idRecipe, minStepNumber, maxStepNumber, instruction);
+
             req.setAttribute("steps", steps);
+            req.setAttribute("recipes", recipes);
             RequestDispatcher dispatcher = req.getRequestDispatcher("step.jsp");
             dispatcher.forward(req, resp);
         } catch (Exception e) {

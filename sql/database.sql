@@ -29,7 +29,8 @@ CREATE TABLE recipe (
 CREATE TABLE ingredient (
     id_ingredient SERIAL PRIMARY KEY,
     ingredient_name VARCHAR(255) NOT NULL,
-    unit VARCHAR(50) NOT NULL -- For example, grams, milliliters, teaspoons, etc.
+    unit VARCHAR(50) NOT NULL, -- For example, grams, milliliters, teaspoons, etc.
+    price INT NOT NULL DEFAULT 0 
 );
 
 CREATE TABLE recipe_ingredient (

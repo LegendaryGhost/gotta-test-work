@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="dao.Step, java.util.ArrayList, util.SessionUtils" %>
+<%@ page import="dao.Step, dao.Recipe, java.util.ArrayList, util.SessionUtils" %>
 <% boolean connected = SessionUtils.isUserConnected(request); %>
 <!DOCTYPE html>
 <html lang="en">
@@ -114,8 +114,13 @@
 
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                         
+                        <!-- Search modal button trigger -->
+                        <button type="button" class="btn btn-icon rounded-pill btn-secondary mx-auto me-2" data-bs-toggle="modal" data-bs-target="#searchModal">
+                            <span class="tf-icons bx bx-search"></span>
+                        </button>
+                        <!-- /Search modal button trigger -->
 
-                        <ul class="navbar-nav flex-row align-items-center ms-auto">
+                        <ul class="navbar-nav flex-row align-items-center">
 
                         <!-- User -->
                         <%@ include file="user.jsp" %>
@@ -129,6 +134,54 @@
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
+                        <!-- Search modal -->
+                        <div class="modal fade" id="searchModal" tabindex="-1" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel1">Critères de recherche</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="GET" action="step">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="search-recipe">Recette</label>
+                                                <select name="searchIdRecipe" class="form-select" id="search-recipe" aria-label="Utilisateur">
+                                                    <option selected value="0">Toutes les recettes</option>
+                                                    <%  for(Recipe recipe : (ArrayList<Recipe>)request.getAttribute("recipes")) { %>
+                                                    <option value="<%= recipe.getId() %>">
+                                                        <%= recipe.getTitle() %>
+                                                    </option>
+                                                    <% } %>
+                                                </select>
+                                            </div>
+                                            <div class="row g-2 mb-3">
+                                                <div class="col mb-0">
+                                                    <label class="form-label" for="search-min-step-number">Numéro d'étape minimum</label>
+                                                    <input name="searchMinStepNumber" min="1" type="number" class="form-control" id="search-min-step-number" placeholder="Numéro d'étape" aria-label="Numéro d'étape" aria-describedby="search-min-step-number">
+                                                </div>
+                                                <div class="col mb-0">
+                                                    <label class="form-label" for="search-max-step-number">Numéro d'étape maximum</label>
+                                                    <input name="searchMaxStepNumber" min="1" type="number" class="form-control" id="search-max-step-number" placeholder="Numéro d'étape" aria-label="Numéro d'étape" aria-describedby="search-max-step-number">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="search-instruction">Instruction</label>
+                                                <input name="searchInstruction" type="text" class="form-control" id="search-instruction" placeholder="Instruction" aria-label="Instruction" aria-describedby="search-instruction">
+                                            </div>
+                                            <div class="modal-footer p-0">
+                                                <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                                    Annuler
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">Rechercher</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Search modal -->
+
                         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gotta taste /</span> Etapes des recettes</h4>
 
                         <!-- Basic Bootstrap Table -->

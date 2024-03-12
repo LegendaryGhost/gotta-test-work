@@ -172,13 +172,13 @@
     - [x] Category table
     - [x] Category form
     - [x] Ingredient table
-    - [ ] Ingredient multi-criteria search form
+    - [x] Ingredient multi-criteria search form
     - [x] Ingredient form
     - [x] Recipe table
     - [x] Recipe multi-criteria search form
     - [x] Recipe form
     - [x] Step table
-    - [ ] Step multi-criteria search form
+    - [x] Step multi-criteria search form
     - [x] Step form
     - [x] Review table
     - [x] Review multi-criteria search form
