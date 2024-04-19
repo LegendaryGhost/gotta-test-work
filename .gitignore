@@ -399,3 +399,5 @@ FodyWeavers.xsd
 
 .vscode/
 bin/
+temp/
+gotta-taste.war
