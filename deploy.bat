@@ -35,7 +35,7 @@ xcopy /s /i "%lib%\*.jar" "%temp%\WEB-INF\lib"
 dir /s /B "%src%\*.java" > sources.txt
 :: Exécuter la commande javac
 javac -d "%temp%\WEB-INF\classes" -cp "%lib%\*" @sources.txt
-:: Supprimer les fichiers sources.txt et libs.txt après la compilation
+:: Supprimer le fichiers sources.txt après la compilation
 del sources.txt
 
 :: Créer un fichier .war nommé [war_name].war à partir du dossier [temp] et son contenu dans le dossier [work_dir]
