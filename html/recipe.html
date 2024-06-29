@@ -1,6 +1,3 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="dao.Recipe, dao.Category, java.util.ArrayList, util.SessionUtils" %>
-<% boolean connected = SessionUtils.isUserConnected(request); %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,7 +44,7 @@
                       </span>
                       <span class="app-brand-text demo menu-text fw-bolder ms-2">Gotta taste</span>
                     </a>
-        
+
                     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
                       <i class="bx bx-chevron-left bx-sm align-middle"></i>
                     </a>
@@ -64,7 +61,7 @@
                             <div data-i18n="Recipies">Recettes</div>
                         </a>
                     </li>
-                    
+
                     <!-- Category -->
                     <li class="menu-item">
                         <a href="category" class="menu-link">
@@ -122,7 +119,39 @@
                         <ul class="navbar-nav flex-row align-items-center">
 
                         <!-- User -->
-                        <%@ include file="user.jsp" %>
+                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                    <div class="d-flex align-items-center avatar avatar-online">
+                                        <i class="bx bx-user-circle fs-3em"></i>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="d-flex align-items-center avatar avatar-online">
+                                                        <i class="bx bx-user-circle fs-3em"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <span class="fw-semibold d-block">Anonyme</span>
+                                                    <small class="text-muted">Admin</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="login">
+                                            <i class="bx bx-log-out me-2"></i>
+                                            <span class="align-middle">Me déconnecter</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                         <!--/ User -->
                         </ul>
                     </div>
@@ -155,12 +184,10 @@
                                                 <label class="form-label" for="search-category">Catégorie</label>
                                                 <select name="searchIdCategory" class="form-select" id="search-category" aria-label="Catégorie de recherche">
                                                     <option selected value="0">Toutes les catégories</option>
-                                                    <%  for(Category category : (ArrayList<Category>)request.getAttribute("categories")) { %>
-                                                        <option value="<%= category.getId() %>">
-                                                            <%= category.getName() %>
-                                                        </option>
-                                                    <% } %>
-                                              </select>
+                                                    <option value="<%= category.getId() %>">
+                                                        <%= category.getName() %>
+                                                    </option>
+                                                </select>
                                             </div>
                                             <div class="row g-2 mb-3">
                                                 <div class="col mb-0">
@@ -204,11 +231,9 @@
                         <!-- Basic Bootstrap Table -->
                         <div class="card">
                             <h5 class="card-header">Liste des recettes</h5>
-                            <% if(connected) { %>
-                                <div class="card-body"><a href="form-recipe" type="button" class="btn btn-success">Ajouter</a></div>
-                            <% } %>
+                            <div class="card-body"><a href="form-recipe" type="button" class="btn btn-success">Ajouter</a></div>
                             <div class="table-responsive text-nowrap" style="overflow-x: visible;">
-                                <table class="table">
+                                <table class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -222,40 +247,36 @@
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        <% for(Recipe recipe : (ArrayList<Recipe>)request.getAttribute("recipes")) { %>
-                                            <tr>
-                                                <td><strong><%= recipe.getId() %></strong></td>
-                                                <td><%= recipe.getTitle() %></td>
-                                                <td><%= recipe.getDescriptionExcerpt() %></td>
-                                                <td><%= recipe.getIdCategory() %></td>
-                                                <td><%= recipe.getFormattedCookTime() %></td>
-                                                <td><%= recipe.getCreatedBy() %></td>
-                                                <td><%= recipe.getFormattedCreatedDate() %></td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="recipe-details?id=<%= recipe.getId() %>">
-                                                                <i class="bx bx-book-content me-1"></i>
-                                                                Détails
-                                                            </a>
-                                                            <% if(connected) { %>
-                                                                <a class="dropdown-item" href="form-recipe?action=update&id=<%= recipe.getId() %>">
-                                                                    <i class="bx bx-edit-alt me-1"></i>
-                                                                    Modifier
-                                                                </a>
-                                                                <a class="dropdown-item" href="recipe?action=delete&id=<%= recipe.getId() %>">
-                                                                    <i class="bx bx-trash me-1"></i>
-                                                                    Supprimer
-                                                                </a>
-                                                            <% } %>
-                                                        </div>
+                                        <tr>
+                                            <td><strong>1</strong></td>
+                                            <td>Margaritta</td>
+                                            <td>A recipe description...</td>
+                                            <td>1</td>
+                                            <td>00:50:00</td>
+                                            <td>Tiarintsoa</td>
+                                            <td>03 Juin 2024</td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#">
+                                                            <i class="bx bx-book-content me-1"></i>
+                                                            Détails
+                                                        </a>
+                                                        <a class="dropdown-item" href="form-recipe?action=update&id=1">
+                                                            <i class="bx bx-edit-alt me-1"></i>
+                                                            Modifier
+                                                        </a>
+                                                        <a class="dropdown-item" href="recipe?action=delete&id=1">
+                                                            <i class="bx bx-trash me-1"></i>
+                                                            Supprimer
+                                                        </a>
                                                     </div>
-                                                </td>
-                                            </tr>
-                                        <% } %>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
