@@ -29,6 +29,9 @@ copy "%web_xml%" "%temp%\WEB-INF"
 :: Copier les fichiers .jar dans [lib] vers [temp] + "\WEB-INF\lib"
 xcopy /s /i "%lib%\*.jar" "%temp%\WEB-INF\lib"
 
+:: Copier la structure de dossier de src dans WEB-INF/classes
+xcopy /t /e "%src%" "%temp%\WEB-INF\classes"
+
 :: Compilation des fichiers .java dans src avec les options suivantes
 :: Note: Assurez-vous que le chemin vers le compilateur Java (javac) est correctement configuré dans votre variable d'environnement PATH.
 :: Créer une liste de tous les fichiers .java dans le répertoire src et ses sous-répertoires
@@ -49,6 +52,8 @@ if exist "%web_apps%\%war_name%.war" (
 
 :: Copier le fichier .war vers [web_apps]
 copy /y "%work_dir%\%war_name%.war" "%web_apps%"
+
+del "%work_dir%\%war_name%.war"
 
 echo Déploiement terminé.
 pause
