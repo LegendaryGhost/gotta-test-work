@@ -8,7 +8,9 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Recipe {
     
@@ -20,8 +22,15 @@ public class Recipe {
     private String createdBy = "";
     private LocalDate createdDate = LocalDate.now();
 
-    private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-    private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter timeFormatter = new DateTimeFormatterBuilder()
+            .appendPattern("H")
+            .appendLiteral(" heure ")
+            .optionalStart()
+            .appendPattern("m")
+            .appendLiteral(" minute")
+            .optionalEnd()
+            .toFormatter(Locale.FRENCH);
+    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.FRENCH);
 
     public Recipe() {}
 
