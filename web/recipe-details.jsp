@@ -1,9 +1,16 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="dao.Recipe, dao.Step, java.util.ArrayList, util.SessionUtils" %>
+<%
+    boolean connected = SessionUtils.isUserConnected(request);
+    Recipe recipe = (Recipe) request.getAttribute("recipe");
+    ArrayList<Step> steps = (ArrayList<Step>) request.getAttribute("steps");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Margarita</title>
+    <title><%= recipe.getTitle() %></title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico" />
@@ -44,7 +51,7 @@
                       </span>
                       <span class="app-brand-text demo menu-text fw-bolder ms-2">Gotta taste</span>
                     </a>
-
+        
                     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
                       <i class="bx bx-chevron-left bx-sm align-middle"></i>
                     </a>
@@ -61,7 +68,7 @@
                             <div data-i18n="Recipies">Recettes</div>
                         </a>
                     </li>
-
+                    
                     <!-- Category -->
                     <li class="menu-item">
                         <a href="category" class="menu-link">
@@ -110,42 +117,16 @@
                     </div>
 
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                        <ul class="navbar-nav flex-row align-items-center ms-auto">
+                        <!-- Search modal button trigger -->
+                        <button type="button" class="btn btn-icon rounded-pill btn-secondary mx-auto me-2" data-bs-toggle="modal" data-bs-target="#searchModal">
+                            <span class="tf-icons bx bx-search"></span>
+                        </button>
+                        <!-- /Search modal button trigger -->
+
+                        <ul class="navbar-nav flex-row align-items-center">
 
                         <!-- User -->
-                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                                    <div class="d-flex align-items-center avatar avatar-online">
-                                        <i class="bx bx-user-circle fs-3em"></i>
-                                    </div>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <div class="d-flex">
-                                                <div class="flex-shrink-0 me-3">
-                                                    <div class="d-flex align-items-center avatar avatar-online">
-                                                        <i class="bx bx-user-circle fs-3em"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">Anonyme</span>
-                                                    <small class="text-muted">Admin</small>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="login">
-                                            <i class="bx bx-log-out me-2"></i>
-                                            <span class="align-middle">Me déconnecter</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                        <%@ include file="user.jsp" %>
                         <!--/ User -->
                         </ul>
                     </div>
@@ -156,7 +137,7 @@
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gotta taste / Recettes / </span> Margarita</h4>
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Gotta taste / Recettes / </span> <%= recipe.getTitle() %></h4>
 
                         <div class="card mb-3">
                             <h1 class="card-header pb-3">Margarita <span class="fs-0-5em text-muted fw-normal">Tiarintsoa</span></h1>
@@ -205,33 +186,11 @@
                                                         <i class="bx bx-dots-vertical-rounded"></i>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="form-ingredient?action=update&id=<%= ingredient.getId() %>">
+                                                        <a class="dropdown-item" href="form-ingredient?action=update&id=">
                                                             <i class="bx bx-edit-alt me-1"></i>
                                                             Modifier
                                                         </a>
-                                                        <a class="dropdown-item" href="ingredient?action=delete&id=<%= ingredient.getId() %>">
-                                                            <i class="bx bx-trash me-1"></i>
-                                                            Supprimer
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>1</strong></td>
-                                            <td>Tomato</td>
-                                            <td>2 pièces</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="form-ingredient?action=update&id=<%= ingredient.getId() %>">
-                                                            <i class="bx bx-edit-alt me-1"></i>
-                                                            Modifier
-                                                        </a>
-                                                        <a class="dropdown-item" href="ingredient?action=delete&id=<%= ingredient.getId() %>">
+                                                        <a class="dropdown-item" href="ingredient?action=delete&id=">
                                                             <i class="bx bx-trash me-1"></i>
                                                             Supprimer
                                                         </a>
@@ -245,52 +204,50 @@
                         </div>
                         <!--/ Recipe's ingredients table -->
 
-                        <!-- Recipe's steps list -->
+                        <!-- Recipe's steps table -->
                         <div class="card">
                             <h5 class="card-header">Etapes de la recette</h5>
-                            <div class="card-body">
-                                <a href="form-recipe" type="button" class="btn btn-success">Ajouter</a>
-                                <div class="demo-inline-spacing mt-4">
-                                    <div class="list-group">
-                                        <div class="list-group-item flex-column align-items-start p-3">
-                                            <div class="d-flex justify-content-between w-100">
-                                                <h6 class="mb-2">Etape 1</h6>
-                                            </div>
-                                            <p class="mb-1 w-50">
-                                                Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius
-                                                blandit.
-                                            </p>
-                                            <div class="actions">
-                                                <a href="form-review?action=update&id=<%= review.getId() %>" type="button" class="update-btn btn rounded-pill btn-icon btn-outline-secondary me-2">
-                                                    <span class="tf-icons bx bx-edit"></span>
-                                                </a>
-                                                <a href="review?action=delete&id=<%= review.getId() %>" type="button" class="delete-btn btn rounded-pill btn-icon btn-outline-danger">
-                                                    <span class="tf-icons bx bx-trash"></span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item flex-column align-items-start p-3">
-                                            <div class="d-flex justify-content-between w-100">
-                                                <h6 class="mb-2">Etape 2</h6>
-                                            </div>
-                                            <p class="mb-1 w-50">
-                                                Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius
-                                                blandit.
-                                            </p>
-                                            <div class="actions">
-                                                <a href="form-review?action=update&id=<%= review.getId() %>" type="button" class="update-btn btn rounded-pill btn-icon btn-outline-secondary me-2">
-                                                    <span class="tf-icons bx bx-edit"></span>
-                                                </a>
-                                                <a href="review?action=delete&id=<%= review.getId() %>" type="button" class="delete-btn btn rounded-pill btn-icon btn-outline-danger">
-                                                    <span class="tf-icons bx bx-trash"></span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="card-body"><a href="form-step" type="button" class="btn btn-success">Ajouter</a></div>
+                            <div class="table-responsive text-nowrap" style="overflow-x: visible;">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Numéro d'étape</th>
+                                        <th>Instruction</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="table-border-bottom-0">
+                                        <% for (Step step : steps) { %>
+                                            <tr>
+                                                <td><strong><%= step.getId() %>></strong></td>
+                                                <td><%= step.getNumber() %></td>
+                                                <td><%= step.getInstructionExcerpt() %></td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="form-ingredient?action=update&id=<%= ingredient.getId() %>">
+                                                                <i class="bx bx-edit-alt me-1"></i>
+                                                                Modifier
+                                                            </a>
+                                                            <a class="dropdown-item" href="ingredient?action=delete&id=<%= ingredient.getId() %>">
+                                                                <i class="bx bx-trash me-1"></i>
+                                                                Supprimer
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <!--/ Recipe's steps list -->
+                        <!--/ Recipe's steps table -->
                     </div>
                     <!-- / Content -->
                 </div>

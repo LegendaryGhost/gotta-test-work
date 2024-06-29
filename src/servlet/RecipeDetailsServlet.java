@@ -1,0 +1,34 @@
+package servlet;
+
+import dao.Recipe;
+import dao.Step;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class RecipeDetailsServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            int idRecipe = req.getParameter("id") == null ? 0 : Integer.parseInt(req.getParameter("id"));
+
+            Recipe recipe = new Recipe(idRecipe);
+            recipe.find();
+            ArrayList<Step> steps = Step.search(idRecipe, 0, 0, null);
+
+            req.setAttribute("recipe", recipe);
+            req.setAttribute("step", steps);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("recipe-details.jsp");
+            dispatcher.forward(req, resp);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+}

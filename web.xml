@@ -35,6 +35,11 @@
   </servlet>
 
   <servlet>
+    <servlet-class>servlet.RecipeDetailsServlet</servlet-class>
+    <servlet-name>RecipeDetailsServlet</servlet-name>
+  </servlet>
+
+  <servlet>
     <servlet-class>servlet.FormRecipeServlet</servlet-class>
     <servlet-name>FormRecipeServlet</servlet-name>
   </servlet>
@@ -89,6 +94,11 @@
   <servlet-mapping>
     <servlet-name>RecipeServlet</servlet-name>
     <url-pattern>/recipe</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>RecipeDetailsServlet</servlet-name>
+    <url-pattern>/recipe-details</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>

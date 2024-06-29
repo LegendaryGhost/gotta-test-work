@@ -97,3 +97,13 @@
 .stars-radio input[type=radio] {
     display: none;
 }
+
+.list-group-item {
+    position: relative;
+}
+
+.list-group-item .actions {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+}
