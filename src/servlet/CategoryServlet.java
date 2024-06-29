@@ -29,12 +29,12 @@ public class CategoryServlet extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher("category.jsp");
             dispatcher.forward(req, resp);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ServletException(e);
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String action = req.getParameter("action");
         int id = Integer.parseInt(req.getParameter("idCategory"));
         String name = req.getParameter("categoryName");
@@ -47,7 +47,7 @@ public class CategoryServlet extends HttpServlet {
                 category.create();
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ServletException(e);
         }
 
         resp.sendRedirect("category");

@@ -44,12 +44,12 @@ public class IngredientServlet extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher("ingredient.jsp");
             dispatcher.forward(req, resp);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ServletException(e);
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String action = req.getParameter("action");
         int id = Integer.parseInt(req.getParameter("idIngredient"));
         String name = req.getParameter("ingredientName");
@@ -64,7 +64,7 @@ public class IngredientServlet extends HttpServlet {
                 ingredient.create();
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ServletException(e);
         }
 
         resp.sendRedirect("ingredient");

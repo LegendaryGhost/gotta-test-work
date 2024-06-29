@@ -55,12 +55,12 @@ public class ReviewServlet extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher("review.jsp");
             dispatcher.forward(req, resp);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ServletException(e);
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String action = req.getParameter("action");
         int id = Integer.parseInt(req.getParameter("idReview"));
         int idUser = Integer.parseInt(req.getParameter("reviewIdUser"));
@@ -76,7 +76,7 @@ public class ReviewServlet extends HttpServlet {
                 review.create();
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ServletException(e);
         }
 
         resp.sendRedirect("review");

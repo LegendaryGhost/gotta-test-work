@@ -1,6 +1,7 @@
 package servlet;
 
 import dao.Recipe;
+import dao.RecipeIngredient;
 import dao.Step;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -20,14 +21,16 @@ public class RecipeDetailsServlet extends HttpServlet {
 
             Recipe recipe = new Recipe(idRecipe);
             recipe.find();
-            ArrayList<Step> steps = Step.search(idRecipe, 0, 0, null);
+            ArrayList<Step> steps = Step.search(idRecipe, 0, 0, "");
+            ArrayList<RecipeIngredient> recipeIngredients = RecipeIngredient.search(idRecipe);
 
             req.setAttribute("recipe", recipe);
-            req.setAttribute("step", steps);
+            req.setAttribute("steps", steps);
+            req.setAttribute("recipeIngredients", recipeIngredients);
             RequestDispatcher dispatcher = req.getRequestDispatcher("recipe-details.jsp");
             dispatcher.forward(req, resp);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ServletException(e);
         }
     }
 

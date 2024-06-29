@@ -18,7 +18,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
         String email = req.getParameter("userEmail");
         String password = req.getParameter("userPassword");
         User user = new User(email, password);
@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
                 resp.sendRedirect("recipe");
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ServletException(e);
         }
     }
 

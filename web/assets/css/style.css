@@ -53,6 +53,12 @@
     background: var(--orange-yellow);
 }
 
+
+.dropdown-item:not(.disabled).active, .dropdown-item:not(.disabled):active {
+    background-color: var(--very-transparent-orange-yellow);
+    color: var(--orange-yellow) !important;
+}
+
 /* Form elements */
 .input-group:focus-within .form-control, .input-group:focus-within .input-group-text {
     border-color: var(--input-focus-border);
@@ -96,4 +102,14 @@
 
 .stars-radio input[type=radio] {
     display: none;
+}
+
+.list-group-item {
+    position: relative;
+}
+
+.list-group-item .actions {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
 }

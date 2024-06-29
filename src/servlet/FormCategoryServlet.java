@@ -22,7 +22,7 @@ public class FormCategoryServlet extends HttpServlet {
             try {
                 category.find();
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                throw new ServletException(e);
             }
         } else {
             action = "create";

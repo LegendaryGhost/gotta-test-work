@@ -64,12 +64,12 @@ public class RecipeServlet extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher("recipe.jsp");
             dispatcher.forward(req, resp);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ServletException(e);
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String action = req.getParameter("action");
         int id = Integer.parseInt(req.getParameter("idRecipe"));
         String title = req.getParameter("recipeTitle");
@@ -87,7 +87,7 @@ public class RecipeServlet extends HttpServlet {
                 recipe.create();
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ServletException(e);
         }
 
         resp.sendRedirect("recipe");

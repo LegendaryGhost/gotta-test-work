@@ -23,7 +23,7 @@ public class FormRecipeServlet extends HttpServlet {
         try {
             categories = Category.all();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ServletException(e);
         }
 
         if (action != null && action.equals("update")) {
@@ -32,7 +32,7 @@ public class FormRecipeServlet extends HttpServlet {
             try {
                 recipe.find();
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                throw new ServletException(e);
             }
         } else {
             action = "create";

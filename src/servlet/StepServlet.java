@@ -49,12 +49,12 @@ public class StepServlet extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher("step.jsp");
             dispatcher.forward(req, resp);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ServletException(e);
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String action = req.getParameter("action");
         int id = Integer.parseInt(req.getParameter("idStep"));
         int idRecipe = Integer.parseInt(req.getParameter("stepIdRecipe"));
@@ -69,7 +69,7 @@ public class StepServlet extends HttpServlet {
                 step.create();
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ServletException(e);
         }
 
         resp.sendRedirect("step");

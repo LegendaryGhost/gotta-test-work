@@ -207,7 +207,7 @@
                             <% if(connected) { %>
                                 <div class="card-body"><a href="form-recipe" type="button" class="btn btn-success">Ajouter</a></div>
                             <% } %>
-                            <div class="table-responsive text-nowrap" style="overflow-x: visible;">
+                            <div class="table-responsive text-nowrap" style="overflow: auto visible">
                                 <table class="table">
                                     <thead>
                                         <tr>

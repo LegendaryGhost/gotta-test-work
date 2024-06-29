@@ -29,7 +29,7 @@ public class FormReviewServlet extends HttpServlet {
         try {
             recipes = Recipe.all();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ServletException(e);
         }
 
         if (action != null && action.equals("update")) {
@@ -38,7 +38,7 @@ public class FormReviewServlet extends HttpServlet {
             try {
                 review.find();
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                throw new ServletException(e);
             }
         } else {
             action = "create";
