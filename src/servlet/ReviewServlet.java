@@ -53,6 +53,7 @@ public class ReviewServlet extends HttpServlet {
             req.setAttribute("users", users);
             req.setAttribute("recipes", recipes);
             req.setAttribute("activeMenuItem", "review");
+            req.setAttribute("pageTitle", "Retour");
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("review.jsp");
             dispatcher.forward(req, resp);

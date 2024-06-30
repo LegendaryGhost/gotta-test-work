@@ -31,6 +31,7 @@ public class FormCategoryServlet extends HttpServlet {
         req.setAttribute("action", action);
         req.setAttribute("category", category);
         req.setAttribute("activeMenuItem", "category");
+        req.setAttribute("pageTitle", "Catégorie de recette");
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("form-category.jsp");
         dispatcher.forward(req, resp);

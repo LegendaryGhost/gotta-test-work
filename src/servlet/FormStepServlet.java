@@ -44,6 +44,7 @@ public class FormStepServlet extends HttpServlet {
         req.setAttribute("step", step);
         req.setAttribute("recipes", recipes);
         req.setAttribute("activeMenuItem", "step");
+        req.setAttribute("pageTitle", "Etape");
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("form-step.jsp");
         dispatcher.forward(req, resp);

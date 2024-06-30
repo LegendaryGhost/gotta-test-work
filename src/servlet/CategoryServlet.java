@@ -27,6 +27,7 @@ public class CategoryServlet extends HttpServlet {
             ArrayList<Category> categories = Category.all();
             req.setAttribute("categories", categories);
             req.setAttribute("activeMenuItem", "category");
+            req.setAttribute("pageTitle", "Catégorie de recette");
             RequestDispatcher dispatcher = req.getRequestDispatcher("category.jsp");
             dispatcher.forward(req, resp);
         } catch (Exception e) {

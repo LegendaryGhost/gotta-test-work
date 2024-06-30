@@ -43,6 +43,7 @@ public class IngredientServlet extends HttpServlet {
 
             req.setAttribute("ingredients", ingredients);
             req.setAttribute("activeMenuItem", "ingredient");
+            req.setAttribute("pageTitle", "Ingrédient");
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("ingredient.jsp");
             dispatcher.forward(req, resp);

@@ -28,6 +28,7 @@ public class RecipeDetailsServlet extends HttpServlet {
             req.setAttribute("steps", steps);
             req.setAttribute("recipeIngredients", recipeIngredients);
             req.setAttribute("activeMenuItem", "recipe");
+            req.setAttribute("pageTitle", "Recette");
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("recipe-details.jsp");
             dispatcher.forward(req, resp);
