@@ -41,6 +41,7 @@ public class FormRecipeServlet extends HttpServlet {
         req.setAttribute("action", action);
         req.setAttribute("recipe", recipe);
         req.setAttribute("categories", categories);
+        req.setAttribute("activeMenuItem", "recipe");
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("form-recipe.jsp");
         dispatcher.forward(req, resp);

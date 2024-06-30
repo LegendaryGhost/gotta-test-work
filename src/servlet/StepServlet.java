@@ -46,6 +46,8 @@ public class StepServlet extends HttpServlet {
 
             req.setAttribute("steps", steps);
             req.setAttribute("recipes", recipes);
+            req.setAttribute("activeMenuItem", "step");
+
             RequestDispatcher dispatcher = req.getRequestDispatcher("step.jsp");
             dispatcher.forward(req, resp);
         } catch (Exception e) {

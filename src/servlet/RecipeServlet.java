@@ -61,6 +61,8 @@ public class RecipeServlet extends HttpServlet {
             ArrayList<Recipe> recipes = Recipe.search(title, description, idCategory, minCookTime, maxCookTime, creator, minCreationDate, maxCreationDate);
             req.setAttribute("recipes", recipes);
             req.setAttribute("categories", categories);
+            req.setAttribute("activeMenuItem", "recipe");
+
             RequestDispatcher dispatcher = req.getRequestDispatcher("recipe.jsp");
             dispatcher.forward(req, resp);
         } catch (Exception e) {

@@ -48,6 +48,7 @@ public class FormReviewServlet extends HttpServlet {
         req.setAttribute("action", action);
         req.setAttribute("review", review);
         req.setAttribute("recipes", recipes);
+        req.setAttribute("activeMenuItem", "review");
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("form-review.jsp");
         dispatcher.forward(req, resp);

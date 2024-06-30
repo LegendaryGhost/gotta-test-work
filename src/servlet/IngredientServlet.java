@@ -40,7 +40,10 @@ public class IngredientServlet extends HttpServlet {
             }
 
             ArrayList<Ingredient> ingredients = Ingredient.search(name, unit, minPrice, maxPrice);
+
             req.setAttribute("ingredients", ingredients);
+            req.setAttribute("activeMenuItem", "ingredient");
+
             RequestDispatcher dispatcher = req.getRequestDispatcher("ingredient.jsp");
             dispatcher.forward(req, resp);
         } catch (Exception e) {

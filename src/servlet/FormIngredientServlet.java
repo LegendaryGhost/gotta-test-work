@@ -30,6 +30,7 @@ public class FormIngredientServlet extends HttpServlet {
 
         req.setAttribute("action", action);
         req.setAttribute("ingredient", ingredient);
+        req.setAttribute("activeMenuItem", "ingredient");
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("form-ingredient.jsp");
         dispatcher.forward(req, resp);
