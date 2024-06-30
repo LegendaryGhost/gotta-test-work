@@ -17,8 +17,10 @@ public class FormStepServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        Step step = new Step();
         ArrayList<Recipe> recipes;
+        int idRecipe = req.getParameter("idRecipe") == null ? 0 : Integer.parseInt(req.getParameter("idRecipe"));
+        Step step = new Step();
+        step.setIdRecipe(idRecipe);
 
         try {
             recipes = Recipe.all();

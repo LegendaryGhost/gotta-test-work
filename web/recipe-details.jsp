@@ -119,13 +119,7 @@
                     </div>
 
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                        <!-- Search modal button trigger -->
-                        <button type="button" class="btn btn-icon rounded-pill btn-secondary mx-auto me-2" data-bs-toggle="modal" data-bs-target="#searchModal">
-                            <span class="tf-icons bx bx-search"></span>
-                        </button>
-                        <!-- /Search modal button trigger -->
-
-                        <ul class="navbar-nav flex-row align-items-center">
+                        <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <!-- User -->
                             <%@ include file="user.jsp" %>
                             <!--/ User -->
@@ -209,29 +203,27 @@
                             <h5 class="card-header">Etapes de la recette</h5>
                             <div class="card-body">
                                 <% if (SessionUtils.isUserConnected(request)) { %>
-                                    <a href="form-step" type="button" class="btn btn-success">Ajouter</a>
+                                    <a href="form-step?idRecipe=<%= recipe.getId() %>" type="button" class="btn btn-success mb-4">Ajouter</a>
                                 <% } %>
-                                <div class="demo-inline-spacing">
-                                    <div class="list-group">
-                                        <% for (Step step : steps) { %>
-                                            <div class="list-group-item flex-column align-items-start p-3">
-                                                <div class="d-flex justify-content-between w-100">
-                                                    <h6 class="mb-2">Etape <%= step.getNumber() %></h6>
-                                                </div>
-                                                <p class="mb-1 w-50"><%= step.getInstruction() %></p>
-                                                <% if (SessionUtils.isUserConnected(request)) { %>
-                                                    <div class="actions">
-                                                        <a href="form-step?action=update&id=<%= step.getId() %>" type="button" class="update-btn btn rounded-pill btn-icon btn-outline-secondary me-2">
-                                                            <span class="tf-icons bx bx-edit"></span>
-                                                        </a>
-                                                        <a href="step?action=delete&id=<%= step.getId() %>" type="button" class="delete-btn btn rounded-pill btn-icon btn-outline-danger">
-                                                            <span class="tf-icons bx bx-trash"></span>
-                                                        </a>
-                                                    </div>
-                                                <% } %>
+                                <div class="list-group">
+                                    <% for (Step step : steps) { %>
+                                        <div class="list-group-item flex-column align-items-start p-3">
+                                            <div class="d-flex justify-content-between w-100">
+                                                <h6 class="mb-2">Etape <%= step.getNumber() %></h6>
                                             </div>
-                                        <% } %>
-                                    </div>
+                                            <p class="mb-1 w-50"><%= step.getInstruction() %></p>
+                                            <% if (SessionUtils.isUserConnected(request)) { %>
+                                                <div class="actions">
+                                                    <a href="form-step?action=update&id=<%= step.getId() %>" type="button" class="update-btn btn rounded-pill btn-icon btn-outline-secondary me-2">
+                                                        <span class="tf-icons bx bx-edit"></span>
+                                                    </a>
+                                                    <a href="step?action=delete&id=<%= step.getId() %>" type="button" class="delete-btn btn rounded-pill btn-icon btn-outline-danger">
+                                                        <span class="tf-icons bx bx-trash"></span>
+                                                    </a>
+                                                </div>
+                                            <% } %>
+                                        </div>
+                                    <% } %>
                                 </div>
                             </div>
                         </div>
