@@ -89,6 +89,11 @@
     <servlet-name>LoginServlet</servlet-name>
   </servlet>
 
+  <servlet>
+    <servlet-class>servlet.FormLoginServlet</servlet-class>
+    <servlet-name>FormLoginServlet</servlet-name>
+  </servlet>
+
 
   <!-- Servlet mapping -->
   <servlet-mapping>
@@ -149,6 +154,11 @@
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>FormLoginServlet</servlet-name>
+    <url-pattern>/form-login</url-pattern>
   </servlet-mapping>
  
 </web-app>

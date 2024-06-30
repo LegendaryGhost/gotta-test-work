@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
         try {
             user.findByEmailAndPassword();
             if (user.getId() == 0) {
-                resp.sendRedirect("login.jsp?error=true");
+                resp.sendRedirect("form-login.jsp?error=true");
             } else {
                 req.getSession().setAttribute("user", user);
                 resp.sendRedirect("recipe");

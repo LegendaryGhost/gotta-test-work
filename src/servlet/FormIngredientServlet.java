@@ -8,11 +8,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import dao.Ingredient;
+import util.SessionUtils;
 
 public class FormIngredientServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (!SessionUtils.isUserConnected(req)) {
+            resp.sendRedirect("form-login");
+            return;
+        }
+
         String action = req.getParameter("action");
         Ingredient ingredient = new Ingredient();
 

@@ -18,7 +18,7 @@ public class FormReviewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (!SessionUtils.isUserConnected(req)) {
-            resp.sendRedirect("login");
+            resp.sendRedirect("form-login");
             return;
         }
 

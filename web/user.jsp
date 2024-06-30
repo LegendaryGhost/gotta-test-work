@@ -34,7 +34,7 @@
         </li>
         <% } else { %>
         <li>
-            <a class="dropdown-item" href="login.jsp">
+            <a class="dropdown-item" href="form-login">
                 <i class="bx bx-log-in me-2"></i>
                 <span class="align-middle">Me connecter</span>
             </a>

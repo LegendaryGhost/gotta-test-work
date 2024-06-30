@@ -11,11 +11,17 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import dao.Recipe;
 import dao.Step;
+import util.SessionUtils;
 
 public class FormStepServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (!SessionUtils.isUserConnected(req)) {
+            resp.sendRedirect("form-login");
+            return;
+        }
+
         String action = req.getParameter("action");
         ArrayList<Recipe> recipes;
         int idRecipe = req.getParameter("idRecipe") == null ? 0 : Integer.parseInt(req.getParameter("idRecipe"));
