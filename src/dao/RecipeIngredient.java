@@ -12,9 +12,20 @@ public class RecipeIngredient {
     private String ingredientName;
     private String ingredientUnit;
     private double quantity;
-    
+
     public RecipeIngredient(int idRecipe) {
         this.idRecipe = idRecipe;
+    }
+
+    public RecipeIngredient(int idRecipe, int idIngredient) {
+        this.idRecipe = idRecipe;
+        this.idIngredient = idIngredient;
+    }
+
+    public RecipeIngredient(int idRecipe, int idIngredient, double quantity) {
+        this.idRecipe = idRecipe;
+        this.idIngredient = idIngredient;
+        this.quantity = quantity;
     }
 
     public RecipeIngredient(int idRecipe, int idIngredient, String ingredientName, String ingredientUnit, double quantity) {
@@ -50,21 +61,120 @@ public class RecipeIngredient {
                     resultSet.getDouble("quantity")
                 ));
             }
-        } catch (Exception e) {
-            throw e;
         } finally {
-            if (resultSet != null) {
-                resultSet.close();
-            }
-            if (statement != null) {
-                statement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            if (resultSet != null) resultSet.close();
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
         }
 
         return recipeIngredients;
+    }
+
+    public boolean find() throws Exception {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        boolean foundRecipeIngredient = false;
+
+        try {
+            connection = DBConnection.getPostgesConnection();
+            statement = connection.prepareStatement(
+                "SELECT * FROM recipe_ingredient AS ri"
+                + " INNER JOIN ingredient AS i ON i.id_ingredient = ri.id_ingredient"
+                + " WHERE ri.id_recipe = ? AND ri.id_ingredient = ?"
+            );
+            statement.setInt(1, idRecipe);
+            statement.setInt(2, idIngredient);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                idRecipe = resultSet.getInt("id_recipe");
+                idIngredient = resultSet.getInt("id_ingredient");
+                ingredientName = resultSet.getString("ingredient_name");
+                ingredientUnit = resultSet.getString("unit");
+                quantity = resultSet.getDouble("quantity");
+
+                foundRecipeIngredient = true;
+            }
+        } finally {
+            if (resultSet != null) resultSet.close();
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
+        }
+
+        return true;
+    }
+
+    public void create() throws Exception {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = DBConnection.getPostgesConnection();
+            connection.setAutoCommit(false);
+            statement = connection.prepareStatement(
+                    "INSERT INTO recipe_ingredient(id_recipe, id_ingredient, quantity)"
+                            + " VALUES (?, ?, ?)"
+            );
+            statement.setInt(1, idRecipe);
+            statement.setInt(2, idIngredient);
+            statement.setDouble(3, quantity);
+            statement.executeUpdate();
+            connection.commit();
+        } catch (Exception e) {
+            if (connection != null)  connection.rollback();
+            throw e;
+        } finally {
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
+        }
+    }
+
+    public void update() throws Exception {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = DBConnection.getPostgesConnection();
+            connection.setAutoCommit(false);
+            statement = connection.prepareStatement(
+                    "UPDATE recipe_ingredient"
+                            + " SET quantity = ?"
+                            + " WHERE id_recipe = ? AND id_ingredient = ?"
+            );
+            statement.setDouble(1, quantity);
+            statement.setInt(2, idRecipe);
+            statement.setInt(3, idIngredient);
+            statement.executeUpdate();
+            connection.commit();
+        } catch (Exception e) {
+            if (connection != null)  connection.rollback();
+            throw e;
+        } finally {
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
+        }
+    }
+
+    public void delete() throws Exception {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = DBConnection.getPostgesConnection();
+            connection.setAutoCommit(false);
+            statement = connection.prepareStatement(
+                    "DELETE FROM recipe_ingredient"
+                            + " WHERE id_recipe = ? AND id_ingredient = ?"
+            );
+            statement.setInt(1, idRecipe);
+            statement.setInt(2, idIngredient);
+            statement.executeUpdate();
+            connection.commit();
+        } catch (Exception e) {
+            if(connection != null) connection.rollback();
+            throw e;
+        } finally {
+            if(statement != null) statement.close();
+            if(connection != null) connection.close();
+        }
     }
 
     public void deleteFromIdRecipe() throws Exception {
@@ -81,11 +191,11 @@ public class RecipeIngredient {
             statement.executeUpdate();
             connection.commit();
         } catch (Exception e) {
-            connection.rollback();
+            if(connection != null) connection.rollback();
             throw e;
         } finally {
-            statement.close();
-            connection.close();
+            if(statement != null) statement.close();
+            if(connection != null) connection.close();
         }
     }
 

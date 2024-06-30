@@ -182,7 +182,7 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="recipe-details?id=<%= recipe.getId() %>">
+                                                <a class="dropdown-item" href="recipe-details?idRecipe=<%= recipe.getId() %>">
                                                     <i class="bx bx-book-content me-1"></i>
                                                     Détails
                                                 </a>

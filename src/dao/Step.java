@@ -210,11 +210,11 @@ public class Step {
             statement.executeUpdate();
             connection.commit();
         } catch (Exception e) {
-            connection.rollback();
+            if (connection != null)  connection.rollback();
             throw e;
         } finally {
-            statement.close();
-            connection.close();
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
         }
     }
 
@@ -236,11 +236,11 @@ public class Step {
             statement.executeUpdate();
             connection.commit();
         } catch (Exception e) {
-            connection.rollback();
+            if (connection != null)  connection.rollback();
             throw e;
         } finally {
-            statement.close();
-            connection.close();
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
         }
     }
 

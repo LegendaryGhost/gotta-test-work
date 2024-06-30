@@ -56,7 +56,7 @@
                                 <div class="divider-text"></div>
                             </div>
                             <p class="card-text">
-                                <span>Categorie <span class="fw-bold"><%= recipe.getIdCategory() %></span></span>
+                                <span>Catégorie <span class="fw-bold">#<%= recipe.getIdCategory() %></span></span>
                                 <span class="ps-4">Temps de préparation : <span
                                         class="fw-bold"><%= recipe.getFormattedCookTime() %></span></span>
                             </p>
@@ -69,7 +69,7 @@
                     <div class="card mb-3">
                         <h5 class="card-header">Ingrédients de la recette</h5>
                         <% if (SessionUtils.isUserConnected(request)) { %>
-                        <div class="card-body"><a href="form-recipe-ingredient" type="button" class="btn btn-success">Ajouter</a>
+                        <div class="card-body"><a href="form-recipe-ingredient?idRecipe=<%= recipe.getId() %>" type="button" class="btn btn-success">Ajouter</a>
                         </div>
                         <% } %>
                         <div class="table-responsive text-nowrap" style="overflow-x: visible;">
@@ -79,7 +79,9 @@
                                     <th>#</th>
                                     <th>Nom</th>
                                     <th>Quantité</th>
+                                    <% if (SessionUtils.isUserConnected(request)) { %>
                                     <th>Actions</th>
+                                    <% } %>
                                 </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
@@ -91,13 +93,13 @@
                                     </td>
                                     <td><%= recipeIngredient.getQuantity() %> <%= recipeIngredient.getIngredientUnit() %>
                                     </td>
+                                    <% if (SessionUtils.isUserConnected(request)) { %>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
                                                     data-bs-toggle="dropdown">
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
-                                            <% if (SessionUtils.isUserConnected(request)) { %>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item"
                                                    href="form-recipe-ingredient?action=update&idRecipe=<%= recipeIngredient.getIdRecipe() %>&idIngredient=<%= recipeIngredient.getIdIngredient() %>">
@@ -110,9 +112,9 @@
                                                     Supprimer
                                                 </a>
                                             </div>
-                                            <% } %>
                                         </div>
                                     </td>
+                                    <% } %>
                                 </tr>
                                 <% } %>
                                 </tbody>

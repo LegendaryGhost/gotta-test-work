@@ -17,7 +17,7 @@ public class RecipeDetailsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            int idRecipe = req.getParameter("id") == null ? 0 : Integer.parseInt(req.getParameter("id"));
+            int idRecipe = req.getParameter("idRecipe") == null ? 0 : Integer.parseInt(req.getParameter("idRecipe"));
 
             Recipe recipe = new Recipe(idRecipe);
             recipe.find();

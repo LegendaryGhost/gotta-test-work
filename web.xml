@@ -40,8 +40,18 @@
   </servlet>
 
   <servlet>
+    <servlet-class>servlet.RecipeIngredientServlet</servlet-class>
+    <servlet-name>RecipeIngredientServlet</servlet-name>
+  </servlet>
+
+  <servlet>
     <servlet-class>servlet.FormRecipeServlet</servlet-class>
     <servlet-name>FormRecipeServlet</servlet-name>
+  </servlet>
+
+  <servlet>
+    <servlet-class>servlet.FormRecipeIngredientServlet</servlet-class>
+    <servlet-name>FormRecipeIngredientServlet</servlet-name>
   </servlet>
 
   <servlet>
@@ -107,8 +117,18 @@
   </servlet-mapping>
 
   <servlet-mapping>
+    <servlet-name>RecipeIngredientServlet</servlet-name>
+    <url-pattern>/recipe-ingredient</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
     <servlet-name>FormRecipeServlet</servlet-name>
     <url-pattern>/form-recipe</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>FormRecipeIngredientServlet</servlet-name>
+    <url-pattern>/form-recipe-ingredient</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>
