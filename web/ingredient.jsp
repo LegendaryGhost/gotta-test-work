@@ -185,44 +185,50 @@
                             <div class="table-responsive text-nowrap" style="overflow-x: visible;">
                                 <table class="table">
                                     <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Nom</th>
-                                            <th>Unité de mesure</th>
-                                            <th>Prix unitaire</th>
-                                            <% if(connected) { %>
-                                                <th>Actions</th>
-                                            <% } %>
-                                        </tr>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nom</th>
+                                        <th>Unité de mesure</th>
+                                        <th>Prix unitaire</th>
+                                        <% if (connected) { %>
+                                        <th>Actions</th>
+                                        <% } %>
+                                    </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        <% for(Ingredient ingredient : (ArrayList<Ingredient>)request.getAttribute("ingredients")) { %>
-                                            <tr>
-                                                <td><strong><%= ingredient.getId() %></strong></td>
-                                                <td><%= ingredient.getName() %></td>
-                                                <td><%= ingredient.getUnit() %></td>
-                                                <td><%= ingredient.getPrice() %> Ar</td>
-                                                <% if(connected) { %>
-                                                    <td>
-                                                        <div class="dropdown">
-                                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                                            </button>
-                                                            <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="form-ingredient?action=update&id=<%= ingredient.getId() %>">
-                                                                    <i class="bx bx-edit-alt me-1"></i>
-                                                                    Modifier
-                                                                </a>
-                                                                <a class="dropdown-item" href="ingredient?action=delete&id=<%= ingredient.getId() %>">
-                                                                    <i class="bx bx-trash me-1"></i>
-                                                                    Supprimer
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                <% } %>
-                                            </tr>
+                                    <% for (Ingredient ingredient : (ArrayList<Ingredient>) request.getAttribute("ingredients")) { %>
+                                    <tr>
+                                        <td><strong><%= ingredient.getId() %>
+                                        </strong></td>
+                                        <td><%= ingredient.getName() %>
+                                        </td>
+                                        <td><%= ingredient.getUnit() %>
+                                        </td>
+                                        <td><%= ingredient.getPrice() %> Ar</td>
+                                        <% if (connected) { %>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                                        data-bs-toggle="dropdown">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item"
+                                                       href="form-ingredient?action=update&id=<%= ingredient.getId() %>">
+                                                        <i class="bx bx-edit-alt me-1"></i>
+                                                        Modifier
+                                                    </a>
+                                                    <a class="dropdown-item"
+                                                       href="ingredient?action=delete&id=<%= ingredient.getId() %>">
+                                                        <i class="bx bx-trash me-1"></i>
+                                                        Supprimer
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <% } %>
+                                    </tr>
+                                    <% } %>
                                     </tbody>
                                 </table>
                             </div>
@@ -238,23 +244,4 @@
     </div>
     <!-- / Layout wrapper -->
 
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="assets/vendor/libs/popper/popper.js"></script>
-    <script src="assets/vendor/js/bootstrap.js"></script>
-    <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
-    <script src="assets/vendor/js/menu.js"></script>
-    <!-- endbuild -->
-
-    <!-- Vendors JS -->
-    <script src="assets/vendor/libs/apex-charts/apexcharts.js"></script>
-
-    <!-- Main JS -->
-    <script src="assets/js/main.js"></script>
-
-    <!-- Page JS -->
-    <script src="assets/js/dashboards-analytics.js"></script>
-</body>
-</html>
+    <%@include file="footer.jsp"%>
