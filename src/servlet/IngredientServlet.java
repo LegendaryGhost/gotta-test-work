@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import dao.RecipeIngredient;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -18,10 +19,17 @@ public class IngredientServlet extends HttpServlet {
         try {
             String action = req.getParameter("action");
 
-            if (action != null && action.equals("delete")) {
-                int id = Integer.parseInt(req.getParameter("id"));
-                Ingredient ingredient = new Ingredient(id);
-                ingredient.delete();
+            if ("delete".equals(action)) {
+                int idIngredient = Integer.parseInt(req.getParameter("id"));
+                RecipeIngredient recipeIngredient = new RecipeIngredient();
+                recipeIngredient.setIdIngredient(idIngredient);
+
+                if (recipeIngredient.findByIdIngredient()) {
+                    req.setAttribute("errorMessage", "Cet ingrédient est encore associé à une ou plusieurs recette(s)");
+                } else {
+                    Ingredient ingredient = new Ingredient(idIngredient);
+                    ingredient.delete();
+                }
             }
 
             String name = req.getParameter("searchName") == null ? "" : req.getParameter("searchName");

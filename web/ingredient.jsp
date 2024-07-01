@@ -1,6 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="dao.Ingredient, java.util.ArrayList, util.SessionUtils" %>
-<% boolean connected = SessionUtils.isUserConnected(request); %>
+<%
+    boolean connected = SessionUtils.isUserConnected(request);
+    String errorMessage = (String) request.getAttribute("errorMessage");
+%>
 
 <%@include file="header.jsp" %>
 
@@ -100,10 +103,19 @@
                     <!-- Basic Bootstrap Table -->
                     <div class="card">
                         <h5 class="card-header">Liste des ingrédients</h5>
-                        <% if (connected) { %>
-                        <div class="card-body"><a href="form-ingredient" type="button"
-                                                  class="btn btn-success">Ajouter</a></div>
-                        <% } %>
+                        <div class="card-body">
+                            <% if (connected) { %>
+                            <div class="mb-3">
+                                <a href="form-ingredient" type="button" class="btn btn-success">Ajouter</a>
+                            </div>
+                            <% } %>
+                            <% if(errorMessage != null) { %>
+                            <div class="alert alert-danger alert-dismissible mb-0" role="alert">
+                                <%= errorMessage %>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <% } %>
+                        </div>
                         <div class="table-responsive text-nowrap" style="overflow-x: visible;">
                             <table class="table">
                                 <thead>

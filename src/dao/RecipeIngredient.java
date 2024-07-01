@@ -13,6 +13,8 @@ public class RecipeIngredient {
     private String ingredientUnit;
     private double quantity;
 
+    public RecipeIngredient() {}
+
     public RecipeIngredient(int idRecipe) {
         this.idRecipe = idRecipe;
     }
@@ -85,6 +87,40 @@ public class RecipeIngredient {
             );
             statement.setInt(1, idRecipe);
             statement.setInt(2, idIngredient);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                idRecipe = resultSet.getInt("id_recipe");
+                idIngredient = resultSet.getInt("id_ingredient");
+                ingredientName = resultSet.getString("ingredient_name");
+                ingredientUnit = resultSet.getString("unit");
+                quantity = resultSet.getDouble("quantity");
+
+                foundRecipeIngredient = true;
+            }
+        } finally {
+            if (resultSet != null) resultSet.close();
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
+        }
+
+        return foundRecipeIngredient;
+    }
+
+    public boolean findByIdIngredient() throws Exception {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        boolean foundRecipeIngredient = false;
+
+        try {
+            connection = DBConnection.getPostgesConnection();
+            statement = connection.prepareStatement(
+                    "SELECT * FROM recipe_ingredient AS ri"
+                            + " INNER JOIN ingredient AS i ON i.id_ingredient = ri.id_ingredient"
+                            + " WHERE ri.id_ingredient = ?"
+            );
+            statement.setInt(1, idIngredient);
             resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
