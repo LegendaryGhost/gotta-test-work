@@ -57,21 +57,27 @@
                                         <input type="hidden" name="idIngredient" value="<%= ingredient.getId() %>">
                                         <div class="mb-3">
                                             <label class="form-label" for="ingredientName">Nom</label>
-                                            <input required value="<%= ingredient.getName() %>" name="ingredientName"
+                                            <input value="<%= ingredient.getName() %>" name="ingredientName"
                                                    type="text" class="form-control" id="ingredientName"
-                                                   placeholder="Nom de la catégorie"/>
+                                                   placeholder="Nom de la catégorie"
+                                                   required
+                                            />
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label" for="ingredientUnit">Unité de mesure</label>
-                                            <input required value="<%= ingredient.getUnit() %>" name="ingredientUnit"
+                                            <input value="<%= ingredient.getUnit() %>" name="ingredientUnit"
                                                    type="text" class="form-control" id="ingredientUnit"
-                                                   placeholder="Unité de mesure"/>
+                                                   placeholder="Unité de mesure"
+                                                   required
+                                            />
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label" for="ingredientPrice">Prix unitaire</label>
-                                            <input required value="<%= ingredient.getPrice() %>" name="ingredientPrice"
+                                            <input value="<%= ingredient.getPrice() %>" name="ingredientPrice"
                                                    min="1" type="number" class="form-control" id="ingredientPrice"
-                                                   placeholder="Prix unitaire"/>
+                                                   placeholder="Prix unitaire"
+                                                   required
+                                            />
                                         </div>
                                         <% if (request.getAttribute("action").equals("create")) { %>
                                         <button type="submit" class="btn btn-success">Ajouter</button>

@@ -56,7 +56,7 @@
                                         <input type="hidden" name="idStep" value="<%= step.getId() %>">
                                         <div class="mb-3">
                                             <label for="stepIdRecipe" class="form-label">Recette</label>
-                                            <select name="stepIdRecipe" id="stepIdRecipe" class="form-select">
+                                            <select name="stepIdRecipe" id="stepIdRecipe" class="form-select" required>
                                                 <% for (Recipe recipe : (ArrayList<Recipe>) request.getAttribute("recipes")) { %>
                                                 <option
                                                         value="<%= recipe.getId() %>"
@@ -72,12 +72,18 @@
                                             <label class="form-label" for="stepNumber">Numéro d'étape</label>
                                             <input name="stepNumber" value="<%= step.getNumber() %>" min="1"
                                                    type="number" class="form-control" id="stepNumber"
-                                                   placeholder="Titre"/>
+                                                   placeholder="Titre"
+                                                   required
+                                            />
                                         </div>
                                         <div class="mb-3">
                                             <label for="stepInstruction" class="form-label">Instruction</label>
                                             <textarea name="stepInstruction" class="form-control" id="stepInstruction"
-                                                      rows="3"><%= step.getInstruction() %></textarea>
+                                                      rows="3"
+                                                      required
+                                            >
+                                                <%= step.getInstruction() %>
+                                            </textarea>
                                         </div>
                                         <% if (request.getAttribute("action").equals("create")) { %>
                                         <button type="submit" class="btn btn-success">Ajouter</button>

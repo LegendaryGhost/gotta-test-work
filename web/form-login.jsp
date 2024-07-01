@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%
+    String error = request.getParameter("error");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,19 +58,12 @@
                     <p class="mb-4">Veuillez vous connecter à votre compte</p>
 
                     <form id="formAuthentication" class="mb-3" action="login" method="POST">
-                        <%
-                            String error = request.getParameter("error");
-                            if (error != null) {
-                                if (error.equals("true")) {
-                        %>
+                        <% if ("true".equals(error)) { %>
                         <div class="alert alert-danger alert-dismissible">
                             Identifiants incorrect
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                        <%
-                                }
-                            }
-                        %>
+                        <% } %>
                         <div class="mb-3">
                             <label for="userEmail" class="form-label">Email</label>
                             <input
@@ -78,6 +74,7 @@
                                     name="userEmail"
                                     placeholder="Saisissez votre email"
                                     autofocus
+                                    required
                             />
                         </div>
                         <div class="mb-3 form-password-toggle">
@@ -91,6 +88,7 @@
                                         name="userPassword"
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                         aria-describedby="password"
+                                        required
                                 />
                                 <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                             </div>

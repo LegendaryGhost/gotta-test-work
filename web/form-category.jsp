@@ -51,14 +51,15 @@
                                 </div>
                                 <div class="card-body">
                                     <form method="POST" action="category">
-                                        <input type="hidden" name="action"
-                                               value="<%= request.getAttribute("action") %>">
+                                        <input type="hidden" name="action" value="<%= request.getAttribute("action") %>">
                                         <input type="hidden" name="idCategory" value="<%= category.getId() %>">
                                         <div class="mb-3">
                                             <label class="form-label" for="categoryName">Nom</label>
                                             <input value="<%= category.getName() %>" name="categoryName" type="text"
                                                    class="form-control" id="categoryName"
-                                                   placeholder="Nom de la catégorie"/>
+                                                   placeholder="Nom de la catégorie"
+                                                   required
+                                            />
                                         </div>
                                         <% if (request.getAttribute("action").equals("create")) { %>
                                         <button type="submit" class="btn btn-success">Ajouter</button>

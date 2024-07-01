@@ -69,7 +69,7 @@
                                         <input type="hidden" name="idRecipe" value="<%= recipeIngredient.getIdRecipe() %>">
                                         <div class="mb-3">
                                             <label for="idIngredient" class="form-label">Ingrédient</label>
-                                            <select name="idIngredient" id="idIngredient" class="form-select">
+                                            <select name="idIngredient" id="idIngredient" class="form-select" required>
                                                 <% if (request.getAttribute("action").equals("update")) { %>
                                                     <% for (Ingredient ingredient : ingredients) { %>
                                                         <% if (recipeIngredient.getIdIngredient() == ingredient.getId()) { %>
@@ -93,7 +93,9 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="quantity">Quantité</label>
                                             <input name="quantity" value="<%= recipeIngredient.getQuantity() %>" min="0.01"
-                                                   type="number" step="0.01" class="form-control" id="quantity"/>
+                                                   type="number" step="0.01" class="form-control" id="quantity"
+                                                   required
+                                            />
                                         </div>
                                         <% if (request.getAttribute("action").equals("create")) { %>
                                         <button type="submit" class="btn btn-success">Ajouter</button>

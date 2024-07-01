@@ -56,12 +56,11 @@
                                         <input type="hidden" name="reviewIdUser" value="<%= review.getIdUser() %>">
                                         <div class="mb-3">
                                             <label for="reviewIdRecipe" class="form-label">Plat</label>
-                                            <select name="reviewIdRecipe" id="reviewIdRecipe" class="form-select">
+                                            <select name="reviewIdRecipe" id="reviewIdRecipe" class="form-select" required>
                                                 <% for (Recipe recipe : (ArrayList<Recipe>) request.getAttribute("recipes")) { %>
                                                 <option
                                                         value="<%= recipe.getId() %>"
-                                                        <% if (recipe.getId() == review.getIdRecipe())
-                                                            out.println("selected"); %>
+                                                        <% if (recipe.getId() == review.getIdRecipe()) { %>selected<% } %>
                                                 >
                                                     <%= recipe.getTitle() %>
                                                 </option>
@@ -92,7 +91,11 @@
                                         <div class="mb-3">
                                             <label for="reviewComment" class="form-label">Commentaire</label>
                                             <textarea name="reviewComment" class="form-control" id="reviewComment"
-                                                      rows="3"><%= review.getComment() %></textarea>
+                                                      rows="3"
+                                                      required
+                                            >
+                                                <%= review.getComment() %>
+                                            </textarea>
                                         </div>
                                         <% if (request.getAttribute("action").equals("create")) { %>
                                         <button type="submit" class="btn btn-success">Ajouter</button>

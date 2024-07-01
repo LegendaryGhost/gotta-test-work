@@ -59,17 +59,23 @@
                                         <div class="mb-3">
                                             <label class="form-label" for="recipeTitle">Titre</label>
                                             <input value="<%= recipe.getTitle() %>" name="recipeTitle" type="text"
-                                                   class="form-control" id="recipeTitle" placeholder="Titre"/>
+                                                   class="form-control" id="recipeTitle" placeholder="Titre"
+                                                   required
+                                            />
                                         </div>
                                         <div class="mb-3">
                                             <label for="recipeDescription" class="form-label">Description</label>
                                             <textarea name="recipeDescription" class="form-control"
                                                       id="recipeDescription"
-                                                      rows="3"><%= recipe.getDescription() %></textarea>
+                                                      rows="3"
+                                                      required
+                                            >
+                                                <%= recipe.getDescription() %>
+                                            </textarea>
                                         </div>
                                         <div class="mb-3">
                                             <label for="recipeIdCategory" class="form-label">Catégorie</label>
-                                            <select name="recipeIdCategory" id="recipeIdCategory" class="form-select">
+                                            <select name="recipeIdCategory" id="recipeIdCategory" class="form-select" required>
                                                 <% for (Category category : (ArrayList<Category>) request.getAttribute("categories")) { %>
                                                 <option
                                                         value="<%= category.getId() %>"
@@ -87,19 +93,26 @@
                                                 <small>heure:minute</small>
                                             </div>
                                             <input value="<%= recipe.getFormattedCookTime() %>" name="recipeCookTime"
-                                                   class="form-control" type="time" id="recipeCookTime">
+                                                   class="form-control" type="time" id="recipeCookTime"
+                                                   min="00:01"
+                                                   required
+                                            >
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label" for="recipeCreator">Créé par</label>
                                             <input value="<%= recipe.getCreatedBy() %>" name="recipeCreator" type="text"
                                                    class="form-control" id="recipeCreator"
-                                                   placeholder="Nom du créateur"/>
+                                                   placeholder="Nom du créateur"
+                                                   required
+                                            />
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label" for="recipeCreationDate">Date de création</label>
                                             <input value="<%= recipe.getFormattedCreatedDate() %>"
                                                    name="recipeCreationDate" type="date" class="form-control"
-                                                   id="recipeCreationDate"/>
+                                                   id="recipeCreationDate"
+                                                   required
+                                            />
                                         </div>
                                         <% if (request.getAttribute("action").equals("create")) { %>
                                         <button type="submit" class="btn btn-success">Ajouter</button>
