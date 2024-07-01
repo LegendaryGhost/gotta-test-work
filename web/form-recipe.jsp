@@ -73,8 +73,7 @@
                                                 <% for (Category category : (ArrayList<Category>) request.getAttribute("categories")) { %>
                                                 <option
                                                         value="<%= category.getId() %>"
-                                                        <% if (category.getId() == recipe.getIdCategory())
-                                                            out.println("selected"); %>
+                                                        <% if (category.getId() == recipe.getIdCategory()) { %>selected<% } %>
                                                 >
                                                     <%= category.getName() %>
                                                 </option>

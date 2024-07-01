@@ -50,7 +50,7 @@
                         <h1 class="card-header pb-3"><%= recipe.getTitle() %> <span
                                 class="fs-0-5em text-muted fw-normal"><%= recipe.getCreatedBy() %></span></h1>
                         <div class="card-body">
-                            <p class="card-subtitle text-muted"><%= recipe.getFormattedCreatedDate() %>
+                            <p class="card-subtitle text-muted"><%= recipe.getHumanFormattedCreatedDate() %>
                             </p>
                             <div class="divider text-end mt-0 mb-2">
                                 <div class="divider-text"></div>
@@ -58,7 +58,7 @@
                             <p class="card-text">
                                 <span>Catégorie <span class="fw-bold">#<%= recipe.getIdCategory() %></span></span>
                                 <span class="ps-4">Temps de préparation : <span
-                                        class="fw-bold"><%= recipe.getFormattedCookTime() %></span></span>
+                                        class="fw-bold"><%= recipe.getHumanFormattedCookTime() %></span></span>
                             </p>
                             <p class="card-text w-50"><%= recipe.getDescription() %>
                             </p>

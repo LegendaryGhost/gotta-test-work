@@ -215,7 +215,7 @@
                                     </p>
                                     <p class="card-text">
                                         <small class="text-muted">
-                                            <%= review.getFormattedDate() %>
+                                            <%= review.getHumanFormattedDate() %>
                                         </small>
                                     </p>
                                     <% if (connected) { %>

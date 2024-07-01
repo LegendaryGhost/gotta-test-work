@@ -94,7 +94,7 @@ public class Step {
             // Start building the SQL query
             StringBuilder sql = new StringBuilder("SELECT * FROM step");
             sql.append(" WHERE instruction ILIKE ?");
-            
+
             // Add conditions if they are not null
             if (searchIdRecipe != 0) {
                 sql.append(" AND id_recipe = ?");
@@ -105,6 +105,7 @@ public class Step {
             if (maxStepNumber != 0) {
                 sql.append(" AND step_number <= ?");
             }
+            sql.append(" ORDER BY step_number");
 
             statement = connection.prepareStatement(
                 sql.toString()

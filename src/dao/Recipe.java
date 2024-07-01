@@ -22,7 +22,8 @@ public class Recipe {
     private String createdBy = "";
     private LocalDate createdDate = LocalDate.now();
 
-    private static final DateTimeFormatter timeFormatter = new DateTimeFormatterBuilder()
+    private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+    private static final DateTimeFormatter humanTimeFormatter = new DateTimeFormatterBuilder()
             .appendPattern("H")
             .appendLiteral(" heure ")
             .optionalStart()
@@ -30,7 +31,8 @@ public class Recipe {
             .appendLiteral(" minute")
             .optionalEnd()
             .toFormatter(Locale.FRENCH);
-    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.FRENCH);
+    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter humanDateFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.FRENCH);
 
     public Recipe() {}
 
@@ -382,6 +384,10 @@ public class Recipe {
     public String getFormattedCookTime() {
         return cookTime.format(timeFormatter);
     }
+
+    public String getHumanFormattedCookTime() {
+        return cookTime.format(humanTimeFormatter);
+    }
     
     public void setCookTime(LocalTime cookTime) {
         this.cookTime = cookTime;
@@ -401,6 +407,10 @@ public class Recipe {
     
     public String getFormattedCreatedDate() {
         return createdDate.format(dateFormatter);
+    }
+
+    public String getHumanFormattedCreatedDate() {
+        return createdDate.format(humanDateFormatter);
     }
     
     public void setCreatedDate(LocalDate createdDate) {

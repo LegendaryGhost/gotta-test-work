@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Review {
 
@@ -17,7 +18,8 @@ public class Review {
     private String comment = "";
     private LocalDate date;
 
-    private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter humanDateFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.FRENCH);
     
     public Review() {}
 
@@ -385,6 +387,10 @@ public class Review {
 
     public String getFormattedDate() {
         return date.format(dateFormatter);
+    }
+
+    public String getHumanFormattedDate() {
+        return date.format(humanDateFormatter);
     }
     
     public void setDate(LocalDate date) {

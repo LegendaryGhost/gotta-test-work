@@ -169,11 +169,11 @@
                                     </td>
                                     <td><%= recipe.getIdCategory() %>
                                     </td>
-                                    <td><%= recipe.getFormattedCookTime() %>
+                                    <td><%= recipe.getHumanFormattedCookTime() %>
                                     </td>
                                     <td><%= recipe.getCreatedBy() %>
                                     </td>
-                                    <td><%= recipe.getFormattedCreatedDate() %>
+                                    <td><%= recipe.getHumanFormattedCreatedDate() %>
                                     </td>
                                     <td>
                                         <div class="dropdown">

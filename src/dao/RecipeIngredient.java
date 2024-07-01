@@ -102,7 +102,7 @@ public class RecipeIngredient {
             if (connection != null) connection.close();
         }
 
-        return true;
+        return foundRecipeIngredient;
     }
 
     public void create() throws Exception {
