@@ -18,5 +18,9 @@
 
 <!-- Page JS -->
 <script src="assets/js/dashboards-analytics.js"></script>
+
+<!-- Star Radio JS -->
+<script src="assets/js/star-radio.js"></script>
+
 </body>
 </html>

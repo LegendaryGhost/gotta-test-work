@@ -69,8 +69,7 @@
                                                       id="recipeDescription"
                                                       rows="3"
                                                       required
-                                            >
-                                                <%= recipe.getDescription() %>
+                                            ><%= recipe.getDescription() %>
                                             </textarea>
                                         </div>
                                         <div class="mb-3">

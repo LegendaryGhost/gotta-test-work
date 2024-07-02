@@ -81,8 +81,7 @@
                                             <textarea name="stepInstruction" class="form-control" id="stepInstruction"
                                                       rows="3"
                                                       required
-                                            >
-                                                <%= step.getInstruction() %>
+                                            ><%= step.getInstruction() %>
                                             </textarea>
                                         </div>
                                         <% if (request.getAttribute("action").equals("create")) { %>
