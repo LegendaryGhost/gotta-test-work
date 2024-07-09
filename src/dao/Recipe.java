@@ -153,8 +153,6 @@ public class Recipe {
                     new Recipe(id, title, description, idCategory, cookTime, createdBy, createdDate)
                 );
             }
-        } catch (Exception e) {
-            throw e;
         } finally {
             if (resultSet != null) resultSet.close();
             if (statement != null) statement.close();
@@ -198,8 +196,6 @@ public class Recipe {
                     new Recipe(id, title, description, idCategory, cookTime, createdBy, createdDate)
                 );
             }
-        } catch (Exception e) {
-            throw e;
         } finally {
             if (resultSet != null) {
                 resultSet.close();
@@ -238,8 +234,6 @@ public class Recipe {
                 createdBy = resultSet.getString("created_by");
                 createdDate = resultSet.getDate("created_date").toLocalDate();
             }
-        } catch (Exception e) {
-            throw e;
         } finally {
             if (resultSet != null) {
                 resultSet.close();
@@ -272,11 +266,11 @@ public class Recipe {
             statement.executeUpdate();
             connection.commit();
         } catch (Exception e) {
-            connection.rollback();
+            if (connection != null) connection.rollback();
             throw e;
         } finally {
-            statement.close();
-            connection.close();
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
         }
     }
 
@@ -301,11 +295,11 @@ public class Recipe {
             statement.executeUpdate();
             connection.commit();
         } catch (Exception e) {
-            connection.rollback();
+            if (connection != null) connection.rollback();
             throw e;
         } finally {
-            statement.close();
-            connection.close();
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
         }
     }
 
@@ -333,11 +327,11 @@ public class Recipe {
             statement.executeUpdate();
             connection.commit();
         } catch (Exception e) {
-            connection.rollback();
+            if (connection != null) connection.rollback();
             throw e;
         } finally {
-            statement.close();
-            connection.close();
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
         }
     }
 

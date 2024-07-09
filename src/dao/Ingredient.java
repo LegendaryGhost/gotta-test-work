@@ -58,8 +58,6 @@ public class Ingredient {
                     new Ingredient(id, name, unit, price)
                 );
             }
-        } catch (Exception e) {
-            throw e;
         } finally {
             if (resultSet != null) {
                 resultSet.close();
@@ -140,8 +138,6 @@ public class Ingredient {
                     new Ingredient(id, name, unit, price)
                 );
             }
-        } catch (Exception e) {
-            throw e;
         } finally {
             if (resultSet != null) {
                 resultSet.close();
@@ -176,8 +172,6 @@ public class Ingredient {
                 unit = resultSet.getString("unit");
                 price = resultSet.getInt("price");
             }
-        } catch (Exception e) {
-            throw e;
         } finally {
             if (resultSet != null) {
                 resultSet.close();
@@ -207,11 +201,11 @@ public class Ingredient {
             statement.executeUpdate();
             connection.commit();
         } catch (Exception e) {
-            connection.rollback();
+            if (connection != null) connection.rollback();
             throw e;
         } finally {
-            statement.close();
-            connection.close();
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
         }
     }
 
@@ -233,11 +227,11 @@ public class Ingredient {
             statement.executeUpdate();
             connection.commit();
         } catch (Exception e) {
-            connection.rollback();
+            if (connection != null) connection.rollback();
             throw e;
         } finally {
-            statement.close();
-            connection.close();
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
         }
     }
 
@@ -255,11 +249,11 @@ public class Ingredient {
             statement.executeUpdate();
             connection.commit();
         } catch (Exception e) {
-            connection.rollback();
+            if (connection != null) connection.rollback();
             throw e;
         } finally {
-            statement.close();
-            connection.close();
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
         }
     }
 

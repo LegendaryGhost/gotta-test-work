@@ -6,11 +6,11 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
-    private static String postgres_hote = "localhost";
-    private static String postgres_port = "5432"; // Le port par défaut de PostgreSQL est 5432
-    private static String postgres_bdd = "gotta_taste";
-    private static String postgres_utilisateur = "postgres";
-    private static String postgres_mdp = "postgres";
+    private static final String postgres_hote = "localhost";
+    private static final String postgres_port = "5432"; // Le port par défaut de PostgreSQL est 5432
+    private static final String postgres_bdd = "gotta_taste";
+    private static final String postgres_utilisateur = "postgres";
+    private static final String postgres_mdp = "postgres";
     // private static String postgres_encoding = "WIN1256";
 
     // private static final String postgresql_url = "jdbc:postgresql://" + postgres_hote + ":" + postgres_port + "/" + postgres_bdd + "?charSet=" + postgres_encoding;

@@ -138,6 +138,7 @@ public class Review {
             if (maxDate != null) {
                 sql.append(" AND review_date <= ?");
             }
+            sql.append(" ORDER BY review_date DESC");
 
             statement = connection.prepareStatement(
                 sql.toString()
@@ -188,8 +189,6 @@ public class Review {
                     new Review(id, idUser, idRecipe, rating, comment, date)
                 );
             }
-        } catch (Exception e) {
-            throw e;
         } finally {
             if (resultSet != null) {
                 resultSet.close();

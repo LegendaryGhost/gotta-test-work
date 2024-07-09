@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import dao.User;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -23,6 +24,7 @@ public class FormReviewServlet extends HttpServlet {
         }
 
         String action = req.getParameter("action");
+        User connectedUser = SessionUtils.getConnectedUser(req);
         Review review = new Review();
         ArrayList<Recipe> recipes;
 
@@ -32,7 +34,7 @@ public class FormReviewServlet extends HttpServlet {
             throw new ServletException(e);
         }
 
-        if (action != null && action.equals("update")) {
+        if ("update".equals(action)) {
             int id = Integer.parseInt(req.getParameter("id"));
             review.setId(id);
             try {
@@ -42,7 +44,12 @@ public class FormReviewServlet extends HttpServlet {
             }
         } else {
             action = "create";
-            review.setIdUser(SessionUtils.getConnectedUser(req).getId());
+            review.setIdUser(connectedUser.getId());
+        }
+
+        if (review.getIdUser() != connectedUser.getId()) {
+            resp.sendRedirect("review");
+            return;
         }
 
         req.setAttribute("action", action);

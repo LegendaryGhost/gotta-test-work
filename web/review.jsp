@@ -1,6 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="dao.Review, dao.User, dao.Recipe, java.util.ArrayList, util.SessionUtils" %>
-<% boolean connected = SessionUtils.isUserConnected(request); %>
+<%
+    boolean connected = SessionUtils.isUserConnected(request);
+    User connectedUser = SessionUtils.getConnectedUser(request);
+%>
 
 <%@include file="header.jsp"%>
 
@@ -219,14 +222,16 @@
                                         </small>
                                     </p>
                                     <% if (connected) { %>
-                                    <a href="form-review?action=update&id=<%= review.getId() %>" type="button"
-                                       class="update-btn btn rounded-pill btn-icon btn-outline-secondary">
-                                        <span class="tf-icons bx bx-edit"></span>
-                                    </a>
-                                    <a href="review?action=delete&id=<%= review.getId() %>" type="button"
-                                       class="delete-btn btn rounded-pill btn-icon btn-outline-danger">
-                                        <span class="tf-icons bx bx-trash"></span>
-                                    </a>
+                                        <% if (connectedUser.getId() == review.getIdUser()) { %>
+                                        <a href="form-review?action=update&id=<%= review.getId() %>" type="button"
+                                           class="update-btn btn rounded-pill btn-icon btn-outline-secondary">
+                                            <span class="tf-icons bx bx-edit"></span>
+                                        </a>
+                                        <a href="review?action=delete&id=<%= review.getId() %>" type="button"
+                                           class="delete-btn btn rounded-pill btn-icon btn-outline-danger">
+                                            <span class="tf-icons bx bx-trash"></span>
+                                        </a>
+                                        <% } %>
                                     <% } %>
                                 </div>
                             </div>

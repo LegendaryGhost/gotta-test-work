@@ -66,8 +66,6 @@ public class User {
                     new User(id, firstname, lastname, email, password)
                 );
             }
-        } catch (Exception e) {
-            throw e;
         } finally {
             if (resultSet != null) {
                 resultSet.close();
@@ -100,11 +98,11 @@ public class User {
             statement.execute();
             connection.commit();
         } catch (Exception e) {
-            connection.rollback();
+            if (connection != null) connection.rollback();
             throw e;
         } finally {
-            statement.close();
-            connection.close();
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
         }
     }
 
@@ -128,8 +126,6 @@ public class User {
                 firstname = resultSet.getString("firstname");
                 lastname = resultSet.getString("lastname");
             }
-        } catch (Exception e) {
-            throw e;
         } finally {
             if (resultSet != null) {
                 resultSet.close();
@@ -155,6 +151,7 @@ public class User {
         }
 
         StringBuilder sb = new StringBuilder();
+        assert hash != null;
         for (byte b : hash) {
             sb.append(String.format("%02x", b));
         }

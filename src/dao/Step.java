@@ -59,18 +59,10 @@ public class Step {
                     new Step(id, idRecipe, number, instruction)
                 );
             }
-        } catch (Exception e) {
-            throw e;
         } finally {
-            if (resultSet != null) {
-                resultSet.close();
-            }
-            if (statement != null) {
-                statement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            if (resultSet != null) resultSet.close();
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
         }
 
         return steps;
@@ -105,7 +97,7 @@ public class Step {
             if (maxStepNumber != 0) {
                 sql.append(" AND step_number <= ?");
             }
-            sql.append(" ORDER BY step_number");
+            sql.append(" ORDER BY id_recipe");
 
             statement = connection.prepareStatement(
                 sql.toString()
@@ -144,8 +136,6 @@ public class Step {
                     new Step(id, idRecipe, number, instruction)
                 );
             }
-        } catch (Exception e) {
-            throw e;
         } finally {
             if (resultSet != null) {
                 resultSet.close();
@@ -180,8 +170,6 @@ public class Step {
                 number = resultSet.getInt("step_number");
                 instruction = resultSet.getString("instruction");
             }
-        } catch (Exception e) {
-            throw e;
         } finally {
             if (resultSet != null) {
                 resultSet.close();
@@ -259,11 +247,11 @@ public class Step {
             statement.executeUpdate();
             connection.commit();
         } catch (Exception e) {
-            connection.rollback();
+            if (connection != null) connection.rollback();
             throw e;
         } finally {
-            statement.close();
-            connection.close();
+            if (statement != null) statement.close();
+            if (connection != null) connection.close();
         }
     }
 
