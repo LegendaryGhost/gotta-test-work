@@ -81,8 +81,7 @@
                                             <textarea name="stepInstruction" class="form-control" id="stepInstruction"
                                                       rows="3"
                                                       required
-                                            ><%= step.getInstruction() %>
-                                            </textarea>
+                                            ><%= step.getInstruction() %></textarea>
                                         </div>
                                         <% if (request.getAttribute("action").equals("create")) { %>
                                         <button type="submit" class="btn btn-success">Ajouter</button>

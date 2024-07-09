@@ -93,8 +93,7 @@
                                             <textarea name="reviewComment" class="form-control" id="reviewComment"
                                                       rows="3"
                                                       required
-                                            ><%= review.getComment() %>
-                                            </textarea>
+                                            ><%= review.getComment() %></textarea>
                                         </div>
                                         <% if (request.getAttribute("action").equals("create")) { %>
                                         <button type="submit" class="btn btn-success">Ajouter</button>

@@ -69,8 +69,7 @@
                                                       id="recipeDescription"
                                                       rows="3"
                                                       required
-                                            ><%= recipe.getDescription() %>
-                                            </textarea>
+                                            ><%= recipe.getDescription() %></textarea>
                                         </div>
                                         <div class="mb-3">
                                             <label for="recipeIdCategory" class="form-label">Catégorie</label>
