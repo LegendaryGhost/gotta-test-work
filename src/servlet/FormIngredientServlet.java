@@ -22,7 +22,7 @@ public class FormIngredientServlet extends HttpServlet {
         String action = req.getParameter("action");
         Ingredient ingredient = new Ingredient();
 
-        if (action != null && action.equals("update")) {
+        if ("update".equals(action)) {
             int id = Integer.parseInt(req.getParameter("id"));
             ingredient.setId(id);
             try {

@@ -317,6 +317,10 @@ public class Recipe {
             review.setIdRecipe(id);
             review.deleteFromIdRecipe();
 
+            Step step = new Step();
+            step.setIdRecipe(id);
+            step.deleteFromIdRecipe();
+
             connection = DBConnection.getPostgesConnection();
             connection.setAutoCommit(false);
             statement = connection.prepareStatement(

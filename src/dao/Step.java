@@ -255,6 +255,28 @@ public class Step {
         }
     }
 
+    public void deleteFromIdRecipe() throws Exception {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = DBConnection.getPostgesConnection();
+            connection.setAutoCommit(false);
+            statement = connection.prepareStatement(
+                    "DELETE FROM step"
+                            + " WHERE id_recipe = ?"
+            );
+            statement.setInt(1, idRecipe);
+            statement.executeUpdate();
+            connection.commit();
+        } catch (Exception e) {
+            if(connection != null) connection.rollback();
+            throw e;
+        } finally {
+            if(statement != null) statement.close();
+            if(connection != null) connection.close();
+        }
+    }
+
     public int getId() {
         return id;
     }

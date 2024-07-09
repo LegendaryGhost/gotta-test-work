@@ -84,8 +84,6 @@ public class Review {
                     new Review(id, idUser, idRecipe, rating, comment, date)
                 );
             }
-        } catch (Exception e) {
-            throw e;
         } finally {
             if (resultSet != null) {
                 resultSet.close();
@@ -226,8 +224,6 @@ public class Review {
                 comment = resultSet.getString("comment");
                 date = resultSet.getDate("review_date").toLocalDate();
             }
-        } catch (Exception e) {
-            throw e;
         } finally {
             if (resultSet != null) {
                 resultSet.close();
@@ -258,11 +254,11 @@ public class Review {
             statement.executeUpdate();
             connection.commit();
         } catch (Exception e) {
-            connection.rollback();
+            if(connection != null) connection.rollback();
             throw e;
         } finally {
-            statement.close();
-            connection.close();
+            if(statement != null) statement.close();
+            if(connection != null) connection.close();
         }
     }
 
@@ -285,11 +281,11 @@ public class Review {
             statement.executeUpdate();
             connection.commit();
         } catch (Exception e) {
-            connection.rollback();
+            if(connection != null) connection.rollback();
             throw e;
         } finally {
-            statement.close();
-            connection.close();
+            if(statement != null) statement.close();
+            if(connection != null) connection.close();
         }
     }
 
@@ -310,11 +306,11 @@ public class Review {
             statement.executeUpdate();
             connection.commit();
         } catch (Exception e) {
-            connection.rollback();
+            if(connection != null) connection.rollback();
             throw e;
         } finally {
-            statement.close();
-            connection.close();
+            if(statement != null) statement.close();
+            if(connection != null) connection.close();
         }
     }
 
